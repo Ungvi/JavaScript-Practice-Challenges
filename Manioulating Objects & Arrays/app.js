@@ -157,15 +157,6 @@ const array = [
   console.log(listHobbies(array));
 
   //========= 5 =========
-  
-  /*function languages(array){
-     return Object.keys(array).forEach(function(key) {
-      console.log(key, array[key].languages);
-     });
-  };
-
-  languages(array);*/
-
   function languages(array) {
     let lang = array.flatMap(obj => obj.languages);
     return console.log(lang);
@@ -174,12 +165,32 @@ const array = [
   languages(array);
 
   //========= 6 =========
+function removeAddress(array) {
+  const result = array.map(obj => {
+    const { address, ...rest } = obj;
+    const location = address ? 'Address removed!' : 'Address is missing!';
+    return { ...rest, location }; 
+  });
+  return result;
+}
 
-  function noAdress(array) {
-    let removeAdress = array.map(function(element) {
-      delete element.address
-    });
-    return removeAdress;
-  };
+console.log(removeAddress(array));
 
-console.log(noAdress);
+//========= 7 =========
+function masterDegree(array) {
+  const regex = /master/i;
+  return array.filter(obj => regex.test(obj.education.degree));
+}
+
+console.log(masterDegree(array));
+
+//========= 8 =========
+function nameAndAge(array) {
+  const result = array.map(obj => `${obj.name} is ${obj.age} years old.`);
+  function ascending(a, b){
+    return a - b;
+  }
+  return result.sort(ascending);
+};
+
+console.log(nameAndAge(array));
