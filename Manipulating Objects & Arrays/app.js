@@ -128,7 +128,7 @@ const array = [
   // Once the new array is created, loop thru the object and with console log write (example: Michael is 35 years old)
 
  //========= 1 =========
-  const olderThan30 = array.filter(person => person.age > 30);
+  const olderThan30 = array.filter(({age}) => age > 30);
 
   console.log(olderThan30);
 
@@ -141,7 +141,7 @@ const array = [
   function arrayAvgAge(array){
   let sum = 0
    array.forEach(element => {
-    sum += element.age
+    (!isNaN(element.age)) ? sum += element.age : 0; // added code to check for valid age values
   });
   let avgAge = sum / array.length;
   return avgAge;
@@ -165,7 +165,7 @@ const array = [
   languages(array);
 
   //========= 6 =========
-function removeAddress(array) {
+/*function removeAddress(array) {
   const result = array.map(obj => {
     const { address, ...rest } = obj;
     const location = address ? 'Address removed!' : 'Address is missing!';
@@ -174,7 +174,13 @@ function removeAddress(array) {
   return result;
 }
 
-console.log(removeAddress(array));
+console.log(removeAddress(array));*/
+
+function removeAddress(array) {
+  return array.forEach(obj => console.log(delete obj.address));
+}
+
+removeAddress(array); // not sure if this is what you meant
 
 //========= 7 =========
 function masterDegree(array) {
@@ -186,7 +192,7 @@ console.log(masterDegree(array));
 
 //========= 8 =========
 function nameAndAge(array) {
-  return array.map(obj => ({name: obj.name, age: obj.age})).sort((a, b) => a.age - b.age).map(obj => `${obj.name} is ${obj.age} years old.`)
+  return array.map(obj => ({name: obj.name, age: obj.age})).sort((a, b) => a.age - b.age).forEach(obj => console.log(`${obj.name} is ${obj.age} years.`))
 };
 
-console.log(nameAndAge(array));
+nameAndAge(array); //added forEach method insted of .map()
