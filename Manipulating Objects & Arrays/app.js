@@ -170,7 +170,7 @@ const removeAddress = (array) => {
   return console.log(array);
 }
 
-removeAddress(array); // code snippet refactored
+removeAddress(array); // code snippet refactored, should be ok now.
 
 //========= 7 =========
 const masterDegree = (array) => {
