@@ -128,7 +128,7 @@ const array = [
   // Once the new array is created, loop thru the object and with console log write (example: Michael is 35 years old)
 
  //========= 1 =========
-  const olderThan30 = array.filter( ({age}) => age > 30);
+  const olderThan30 = array.filter(({ age }) => age > 30);
 
   console.log(olderThan30); // space added
   //========= 2 =========
