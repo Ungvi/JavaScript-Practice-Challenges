@@ -190,15 +190,15 @@ nameAndAge(array);
 
 //Create a functuion which dynamically deletes keys
 
-const removeKeys = (param1, param2, array) => {
-  console.log(array.map((obj) => {
+const removeKeys = ([param1, param2], array) => {
+  return array.map((obj) => {
     const newObj = {};
 
     Object.keys(obj).forEach((key) => {
-      ![param1, param2].includes(key) ? newObj[key] = obj[key] : 0;
+      ![param1, param2].includes(key) ? newObj[key] = obj[key] : delete obj.key;
     });
     return newObj;
-  }));
+  });
 };
 
-removeKeys('name', 'occupation', array);
+console.log(removeKeys(['name', 'age'], array));
