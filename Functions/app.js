@@ -10,6 +10,9 @@ console.log(largestNum(1, 4, 26, 12, 337, 9, 45, 11, 3));
 
 const buttons = document.querySelectorAll('input[type="button"]');
 const display = document.querySelector('#display input[name="display"]');
+const formatResult = result => {
+    return Number.isInteger(result) ? result.toString() : result.toFixed(2);
+}
 
 buttons.forEach(button => {
     button.addEventListener('click', event => {
@@ -20,7 +23,7 @@ buttons.forEach(button => {
                 : buttonValue === 'DE' 
                     ? display.value = display.value.slice(0, -1)
                         : buttonValue === '='
-                            ? display.value = eval(display.value).toFixed(3)
+                            ? display.value = formatResult(eval(display.value))
                             : display.value += buttonValue;
 
     });
