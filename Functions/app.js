@@ -13,6 +13,15 @@ const display = document.querySelector('#display input[name="display"]');
 
 buttons.forEach(button => {
     button.addEventListener('click', event => {
-        display.value += event.target.value;
+        const buttonValue = event.target.value
+
+        buttonValue === 'AC' 
+            ? display.value = ' ' 
+                : buttonValue === 'DE' 
+                    ? display.value = display.value.slice(0, -1)
+                        : buttonValue === '='
+                            ? display.value = eval(display.value).toFixed(3)
+                            : display.value += buttonValue;
+
     });
 });
