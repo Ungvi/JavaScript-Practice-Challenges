@@ -128,20 +128,19 @@ const array = [
   // Once the new array is created, loop thru the object and with console log write (example: Michael is 35 years old)
 
  //========= 1 =========
-  const olderThan30 = array.filter(person => person.age > 30);
+  const olderThan30 = array.filter(({ age }) => age > 30);
 
-  console.log(olderThan30);
-
+  console.log(olderThan30); // space added
   //========= 2 =========
   const employeeStat = array.map(empolyeeStatus => empolyeeStatus.isEmployed ? 'yes' : 'no');
 
   console.log(employeeStat);
 
   //========= 3 =========
-  function arrayAvgAge(array){
+  const arrayAvgAge = (array) => {
   let sum = 0
    array.forEach(element => {
-    sum += element.age
+    (!isNaN(element.age)) ? sum += element.age : 0;
   });
   let avgAge = sum / array.length;
   return avgAge;
@@ -149,7 +148,7 @@ const array = [
   console.log(arrayAvgAge(array));
 
   //========= 4 =========
-  function listHobbies(array){
+  const listHobbies = (array) => {
     let hobbies = array.flatMap(obj => obj.hobbies);
     const uniqueHobby = [...new Set(hobbies)];
     return uniqueHobby;
@@ -157,7 +156,7 @@ const array = [
   console.log(listHobbies(array));
 
   //========= 5 =========
-  function languages(array) {
+  const languages = (array) => {
     let lang = array.flatMap(obj => obj.languages);
     return console.log(lang);
   };
@@ -165,19 +164,16 @@ const array = [
   languages(array);
 
   //========= 6 =========
-function removeAddress(array) {
-  const result = array.map(obj => {
-    const { address, ...rest } = obj;
-    const location = address ? 'Address removed!' : 'Address is missing!';
-    return { ...rest, location }; 
-  });
-  return result;
+
+const removeAddress = (array) => {
+  array.forEach(obj => delete obj.address);
+  return console.log(array);
 }
 
-console.log(removeAddress(array));
+removeAddress(array); // code snippet refactored, should be ok now.
 
 //========= 7 =========
-function masterDegree(array) {
+const masterDegree = (array) => {
   const regex = /master/i;
   return array.filter(obj => regex.test(obj.education.degree));
 }
@@ -185,8 +181,24 @@ function masterDegree(array) {
 console.log(masterDegree(array));
 
 //========= 8 =========
-function nameAndAge(array) {
-  return array.map(obj => ({name: obj.name, age: obj.age})).sort((a, b) => a.age - b.age).map(obj => `${obj.name} is ${obj.age} years old.`)
+const nameAndAge = (array) => {
+  return array.map(obj => ({name: obj.name, age: obj.age})).sort((a, b) => a.age - b.age).forEach(obj => console.log(`${obj.name} is ${obj.age} years.`))
 };
 
-console.log(nameAndAge(array));
+nameAndAge(array);
+
+
+//Create a functuion which dynamically deletes keys
+
+const removeKeys = ([param1, param2], array) => {
+  return array.map((obj) => {
+    const newObj = {};
+
+    Object.keys(obj).forEach((key) => {
+      ![param1, param2].includes(key) ? newObj[key] = obj[key] : delete obj.key;
+    });
+    return newObj;
+  });
+};
+
+console.log(removeKeys(['name', 'age'], array));
